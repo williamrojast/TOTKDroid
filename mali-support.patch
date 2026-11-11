@@ -1,0 +1,218 @@
+diff --git a/runtime/nvn/vulkan/android_driver.c b/runtime/nvn/vulkan/android_driver.c
+index 511438e..6e2d282 100644
+--- a/runtime/nvn/vulkan/android_driver.c
++++ b/runtime/nvn/vulkan/android_driver.c
+@@ -7,13 +7,14 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
++#include <unistd.h>
+ 
+ #include "vk.h"
+ 
+ // Does this driver offer a Vulkan GPU at all? (Turnip v26.0.0 R8, built for the A7xx: none on an Adreno 830 - the app
+ // stopped at "no Vulkan device" on every start, its settings out of reach.) 1.1 and up: below 1.3 device.c checks the
+ // extensions it needs instead (COMPAT_EXT).
+-static bool driver_has_gpu(PFN_vkGetInstanceProcAddr gipa) {
++static bool driver_has_gpu(PFN_vkGetInstanceProcAddr gipa, uint32_t *vendor) {
+     PFN_vkCreateInstance create = (PFN_vkCreateInstance)gipa(NULL, "vkCreateInstance");
+     if (!create) return false;
+     VkApplicationInfo app = {.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO, .apiVersion = VK_API_VERSION_1_3};
+@@ -33,6 +34,7 @@ static bool driver_has_gpu(PFN_vkGetInstanceProcAddr gipa) {
+                 VkPhysicalDeviceProperties p;
+                 props(pd[i], &p);
+                 ok = p.apiVersion >= VK_API_VERSION_1_1;
++                if (ok && vendor) *vendor = p.vendorID;
+             }
+     }
+     if (destroy) destroy(inst, NULL);
+@@ -45,9 +47,37 @@ static bool driver_has_gpu(PFN_vkGetInstanceProcAddr gipa) {
+ static char g_rejected[128];
+ const char *vk_driver_rejected(void) { return g_rejected; }
+ 
++// A chosen driver that was not even tried, and why ("" none): custom drivers here are Turnip builds, made for Adreno
++// (Qualcomm's kgsl); on another maker's GPU the system's own driver is the one that runs (never an Adreno one)
++static char g_ignored[160];
++const char *vk_driver_ignored(void) { return g_ignored; }
++
++// The maker (Vulkan vendorID) of the GPU the system's own driver offers, 0 if it can't be told
++static uint32_t system_gpu_vendor(void) {
++    void *sys = dlopen("libvulkan.so", RTLD_NOW | RTLD_LOCAL);
++    if (!sys) return 0;
++    PFN_vkGetInstanceProcAddr g = (PFN_vkGetInstanceProcAddr)dlsym(sys, "vkGetInstanceProcAddr");
++    uint32_t vendor = 0;
++    if (g && !driver_has_gpu(g, &vendor)) vendor = 0;
++    return vendor;
++}
++
+ void vk_android_load(void) {
+     void *lib = NULL;
+     const char *drv = getenv("LARECOMP_VK_DRIVER"), *hooks = getenv("LARECOMP_NATIVE_LIB_DIR");
++    // Adreno's kernel node (kgsl) there: the flow is exactly as before, no Vulkan call is added ahead of the custom
++    // driver. Without it (Mali, Xclipse...), the system's driver names the maker: not Qualcomm's, the custom driver is out.
++    bool kgsl = access("/dev/kgsl-3d0", F_OK) == 0 || access("/sys/class/kgsl/kgsl-3d0", F_OK) == 0;
++    if (drv && *drv && !kgsl) {
++        uint32_t vendor = system_gpu_vendor();
++        if (vendor && vendor != 0x5143) {
++            snprintf(g_ignored, sizeof g_ignored, "custom drivers are for Adreno GPUs; this GPU's maker is %#x (%s)", vendor,
++                     vendor == 0x13B5 ? "Arm" : "not Qualcomm");
++            LOG("[vk] driver %s ignored: %s - using the system driver\n", drv, g_ignored);
++            unsetenv("LARECOMP_VK_DRIVER");
++            drv = NULL;
++        }
++    }
+     if (drv && *drv && hooks && *hooks) {
+         const char *slash = strrchr(drv, '/');
+         char dir[1024];
+@@ -56,7 +86,7 @@ void vk_android_load(void) {
+                                              NULL, NULL);
+         LOG("[vk] driver %s: %s\n", drv, lib ? "loaded through adrenotools" : "FAILED, using the system driver");
+         PFN_vkGetInstanceProcAddr g = lib ? (PFN_vkGetInstanceProcAddr)dlsym(lib, "vkGetInstanceProcAddr") : NULL;
+-        if (lib && (!g || !driver_has_gpu(g))) {
++        if (lib && (!g || !driver_has_gpu(g, NULL))) {
+             LOG("[vk] driver %s: no Vulkan 1.1+ GPU it supports here - using the system driver\n", drv);
+             lib = NULL;  // (left loaded: a driver doesn't always unload cleanly)
+         }
+diff --git a/runtime/nvn/vulkan/device.c b/runtime/nvn/vulkan/device.c
+index 39f84df..3ca95bd 100644
+--- a/runtime/nvn/vulkan/device.c
++++ b/runtime/nvn/vulkan/device.c
+@@ -129,6 +129,9 @@ static const struct { const char *name; uint32_t below; uint8_t optional; } COMP
+ // is - the app icon's long-press shortcut reaches it, DriverPickActivity.java)
+ #define DRIVER_HINT "Another driver may have it - on Adreno GPUs, a Turnip driver: long-press the app icon, then Choose " \
+                     "driver. "
++// The same hint for a GPU known not to be Qualcomm's (Mali...): a Turnip driver isn't an option there
++#define DRIVER_HINT_OTHER \
++    "The phone's own graphics driver is the one this GPU can use: check for a system update that includes a newer GPU driver. "
+ // (ahead of them: a chosen driver that couldn't be used, so the system's ran - android_driver.c)
+ static const char *rejected_note(void) {
+     static char s[256];
+@@ -681,9 +684,10 @@ static void create_device(void) {
+             (unsigned long long)g_vk.props.limits.minStorageBufferOffsetAlignment, types);
+     }
+     const char *missing = vk_missing_backend_feature(&h11, &h12, &h13);
+-    if (missing) FATAL("%sVulkan driver on %s lacks a feature required by this renderer: %s. " DRIVER_HINT "\n"
++    if (missing) FATAL("%sVulkan driver on %s lacks a feature required by this renderer: %s. %s\n"
+                        "Driver: %s. Include this message, phone model and app version in your bug report.\n",
+-                       rejected_note(), g_vk.props.deviceName, missing, driver.driverName);
++                       rejected_note(), g_vk.props.deviceName, missing,
++                       vk_gpu_vendor() == VK_GPU_QCOM ? DRIVER_HINT : DRIVER_HINT_OTHER, driver.driverName);
+ #endif
+     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT div = {
+         .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
+@@ -773,6 +777,16 @@ static void create_device(void) {
+         ff.pNext = head;
+         f.pNext = fault ? (void *)&ff : head;
+     }
++#endif
++#ifdef __ANDROID__
++    {   // for driver compatibility reports (a Mali's, above all): the GPU's maker as the code takes it, the driver's build, and
++        // which optional paths are on - all as the driver reported them, nothing assumed
++        static const char *const maker[] = {"unknown", "Qualcomm", "Arm", "other"};
++        LOG("[vk-cap] maker %s driver-version %#x; paths: dynamic-rendering %u sync2 %u eds %u eds2 %u host-import %u "
++            "map-placed %u bda %u divisor %u custom-border %u device-fault %u\n",
++            maker[vk_gpu_vendor()], g_vk.props.driverVersion, g_vk.dyn_render, g_vk.sync2, g_vk.eds, g_vk.eds2, g_vk.host_import,
++            g_vk.map_placed, g_vk.bda, g_vk.divisor, g_vk.custom_border, fault);
++    }
+ #endif
+     b->independentBlend = h->independentBlend;
+     b->dualSrcBlend = h->dualSrcBlend;
+@@ -1752,7 +1766,12 @@ bool vk_adreno_8xx(const char *name) {
+     return n >= 800 && n < 900;
+ }
+ // A Turnip path's setting (-1 Automatic, 1 on, 0 off) for this GPU
+-bool vk_turnip_path_on(int setting) { return setting < 0 ? vk_adreno_8xx(g_vk.props.deviceName) : setting != 0; }
++// (Turnip is Adreno-only: on a GPU known not to be Qualcomm's - Mali, Xclipse - none of these paths is taken, whatever the setting)
++bool vk_turnip_path_on(int setting) {
++    int v = vk_gpu_vendor();
++    if (v != VK_GPU_UNKNOWN && v != VK_GPU_QCOM) return false;
++    return setting < 0 ? vk_adreno_8xx(g_vk.props.deviceName) : setting != 0;
++}
+ int vk_between_fps(void) {
+     static int fps = 45;
+     static uint64_t next;
+@@ -1831,7 +1850,9 @@ void ui_window_init(void) {
+             }
+         }
+         g_lrz_at_start = lrz != 0;
+-        if (!lrz && !getenv("TU_DEBUG")) setenv("TU_DEBUG", "nolrz", 1);
++        // a GPU the last start named that isn't an Adreno (Mali...): Turnip isn't in play, TU_DEBUG is left alone
++        bool not_adreno = g_settings.turnip_lrz < 0 && model[0] && !strstr(model, "Adreno");
++        if (!lrz && !not_adreno && !getenv("TU_DEBUG")) setenv("TU_DEBUG", "nolrz", 1);
+         LOG("[vk] Turnip LRZ %s (%s%s)%s%s\n", lrz ? "on" : "off", g_settings.turnip_lrz < 0 ? "automatic: " : "settings",
+             g_settings.turnip_lrz < 0 ? (model[0] ? model : "GPU unknown") : "", getenv("TU_DEBUG") ? ", TU_DEBUG=" : "",
+             getenv("TU_DEBUG") ? getenv("TU_DEBUG") : "");
+@@ -1961,6 +1982,13 @@ bool vk_driver_is_turnip(void) {
+     }
+     return t > 0;
+ }
++
++// The GPU's maker by vendorID (vk.h VK_GPU_*): what picks the Adreno-only or the Mali paths. Before the device is
++// picked: VK_GPU_UNKNOWN (callers keep the behaviour they had).
++int vk_gpu_vendor(void) {
++    if (!g_vk.phys) return VK_GPU_UNKNOWN;
++    return g_vk.props.vendorID == 0x5143 ? VK_GPU_QCOM : g_vk.props.vendorID == 0x13B5 ? VK_GPU_ARM : VK_GPU_OTHER;
++}
+ #endif
+ 
+ void backend_init(void) {
+diff --git a/runtime/nvn/vulkan/vk.h b/runtime/nvn/vulkan/vk.h
+index 0159d27..2a02b31 100644
+--- a/runtime/nvn/vulkan/vk.h
++++ b/runtime/nvn/vulkan/vk.h
+@@ -27,6 +27,11 @@ void vk_device_fault_report(void);
+ #ifdef __ANDROID__
+ void vk_android_load(void);  // android_driver.c: the Vulkan driver (adrenotools / system) into volk
+ const char *vk_driver_rejected(void);  // (the chosen driver package the system's stood in for; "" none)
++// The GPU's maker from the device's own vendorID (Qualcomm 0x5143, Arm 0x13B5), no names guessed: VK_GPU_UNKNOWN until
++// the device is picked (device.c vk_gpu_vendor). Turnip reports Qualcomm's id too: vk_driver_is_turnip tells them apart.
++enum { VK_GPU_UNKNOWN = 0, VK_GPU_QCOM, VK_GPU_ARM, VK_GPU_OTHER };
++int vk_gpu_vendor(void);
++const char *vk_driver_ignored(void);  // (android_driver.c: why a chosen driver was not tried, "" none)
+ void vk_wait_ready(void);    // device.c: until the device exists (the window's thread makes it)
+ void vk_vamm_before_map(uint64_t addr, uint64_t size);
+ bool vk_vamm_buffer(uint64_t addr, uint64_t size, VkBuffer *buf, VkDeviceSize *off);
+diff --git a/runtime/ui/i18n_es.inc b/runtime/ui/i18n_es.inc
+index 870cd1a..2dcc37d 100644
+--- a/runtime/ui/i18n_es.inc
++++ b/runtime/ui/i18n_es.inc
+@@ -597,3 +597,5 @@
+  "Movimiento del teléfono como la pantalla de la Switch"},
+ {"Off: the phone moves the aim as a controller would. On: as the Switch's own screen in handheld mode - try it if tilting the phone turns the aim, and turning it tilts.",
+  "Desactivado: el teléfono mueve la mira como un mando. Activado: como la propia pantalla de la Switch en modo portátil; pruébalo si al inclinar el teléfono la mira gira, y al girarlo se inclina."},
++{"This GPU runs on the system's own graphics driver. Updating Android is the way to get a newer one.",
++ "Esta GPU usa el controlador gráfico del propio sistema. Actualizar Android es la forma de obtener uno más nuevo."},
+diff --git a/runtime/ui/launcher.mm b/runtime/ui/launcher.mm
+index 71f64c4..9d8cfc8 100644
+--- a/runtime/ui/launcher.mm
++++ b/runtime/ui/launcher.mm
+@@ -542,6 +542,8 @@ extern "C" bool vk_lrz_at_start(void);
+ extern "C" bool vk_heap_file_possible(void);
+ extern "C" const char *vk_gpu_name(void);
+ extern "C" const char *vk_driver_rejected(void);  // (runtime/nvn/vulkan/android_driver.c)
++extern "C" const char *vk_driver_ignored(void);   // (android_driver.c: a chosen driver not tried, and why)
++extern "C" int vk_gpu_vendor(void);                // (device.c: 0 unknown, 1 Qualcomm, 2 Arm, 3 other - vk.h VK_GPU_*)
+ extern "C" const char *vk_driver_desc(void);      // (its own name and version: runtime/nvn/vulkan/device.c)
+ extern "C" bool vk_driver_is_turnip(void);
+ extern "C" const char *vk_gpu_desc(void);  // ("Adreno (TM) 830 - Turnip")
+@@ -1445,10 +1447,17 @@ static void prelaunch_tab(float sc) {
+         if (*rejected)
+             ImGui::TextColored(ImVec4(1.0f, 0.62f, 0.3f, 1.0f), tr("%s couldn't be used on this GPU: choose a driver made for it."),
+                                rejected);
+-        ImGui::TextDisabled("%s", tr("The game runs on the system's driver, lighting included. On Adreno GPUs, Mesa's Turnip "
+-                                     "driver runs it faster: choose a Turnip driver package (.zip, as for adrenotools)."));
++        // (a GPU known not to be Qualcomm's - Mali, Xclipse: custom drivers are Turnip builds for Adreno, not offered there)
++        const bool not_adreno = vk_gpu_vendor() >= 2;
++        if (*vk_driver_ignored())
++            ImGui::TextColored(ImVec4(1.0f, 0.62f, 0.3f, 1.0f), "%s", vk_driver_ignored());
++        if (not_adreno)
++            ImGui::TextDisabled("%s", tr("This GPU runs on the system's own graphics driver. Updating Android is the way to get a newer one."));
++        else
++            ImGui::TextDisabled("%s", tr("The game runs on the system's driver, lighting included. On Adreno GPUs, Mesa's Turnip "
++                                         "driver runs it faster: choose a Turnip driver package (.zip, as for adrenotools)."));
+         ImGui::PopTextWrapPos();
+-        if (ImGui::Button(tr("Choose driver"))) android_call("pickDriver");
++        if (!not_adreno && ImGui::Button(tr("Choose driver"))) android_call("pickDriver");
+         if (d && *d) {  // (a custom driver in use: back to the system's)
+             ImGui::SameLine();
+             if (ImGui::Button(tr("Use the system driver"))) android_call("useSystemDriver");
