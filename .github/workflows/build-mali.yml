@@ -1,0 +1,37 @@
+name: Build Mali APK
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Aplicar parche Mali
+        run: |
+          git apply --check mali-support.patch
+          git apply mali-support.patch
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Herramientas del sistema
+        run: sudo apt-get update && sudo apt-get install -y nasm yasm make pkg-config python3 curl unzip
+      - name: Android SDK NDK CMake
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "ndk;30.0.16248370" "cmake;3.30.4" "platforms;android-36" "build-tools;36.0.0"
+      - name: Dependencias nativas
+        run: bash android/deps/build_deps.sh
+      - name: FFmpeg
+        run: bash android/deps/build_ffmpeg.sh
+      - name: APK de desarrollo
+        working-directory: android/totkrecompandroid
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TOTKDroid-Mali-debug-apk
+          path: android/totkrecompandroid/app/build/outputs/apk/debug/*.apk
