@@ -12,6 +12,10 @@ jobs:
         run: |
           git apply --check mali-support.patch
           git apply mali-support.patch
+      - name: Clave de firma fija (solo para versiones de desarrollo)
+        run: |
+          mkdir -p ~/.android
+          cp android/mali-debug.keystore ~/.android/debug.keystore
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
