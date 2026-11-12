@@ -1,3 +1,62 @@
+diff --git a/android/mali-debug.keystore b/android/mali-debug.keystore
+new file mode 100644
+index 0000000000000000000000000000000000000000..b1381bd4c162f55dc75ee1cdb97c36507274566b
+GIT binary patch
+literal 2666
+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
+
+literal 0
+HcmV?d00001
+
 diff --git a/runtime/nvn/vulkan/android_driver.c b/runtime/nvn/vulkan/android_driver.c
 index 511438e..6e2d282 100644
 --- a/runtime/nvn/vulkan/android_driver.c
@@ -74,7 +133,7 @@ index 511438e..6e2d282 100644
              lib = NULL;  // (left loaded: a driver doesn't always unload cleanly)
          }
 diff --git a/runtime/nvn/vulkan/device.c b/runtime/nvn/vulkan/device.c
-index 39f84df..3ca95bd 100644
+index 39f84df..8151f5d 100644
 --- a/runtime/nvn/vulkan/device.c
 +++ b/runtime/nvn/vulkan/device.c
 @@ -129,6 +129,9 @@ static const struct { const char *name; uint32_t below; uint8_t optional; } COMP
@@ -87,7 +146,23 @@ index 39f84df..3ca95bd 100644
  // (ahead of them: a chosen driver that couldn't be used, so the system's ran - android_driver.c)
  static const char *rejected_note(void) {
      static char s[256];
-@@ -681,9 +684,10 @@ static void create_device(void) {
+@@ -558,6 +561,15 @@ static void create_device(void) {
+     // (a dma-buf, the other file type: where the opaque one takes no memory the CPU can use - Xclipse 530, #234)
+     g_vk.mem_dmabuf = g_vk.mem_fd && has_ext(ep, ne, VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME);
+     if (g_vk.mem_dmabuf) ext[n_ext++] = VK_EXT_EXTERNAL_MEMORY_DMA_BUF_EXTENSION_NAME;
++    // An Arm GPU: Android's hardware buffers imported as Vulkan memory, tested once at the start (memfd_probe.c vk_ahb_probe;
++    // the game doesn't use them yet) - the extension and the one it needs beyond Vulkan 1.1
++    g_vk.mem_ahb = vk_gpu_vendor() == VK_GPU_ARM && g_vk.api >= VK_API_VERSION_1_1 &&
++                   has_ext(ep, ne, VK_ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME) &&
++                   has_ext(ep, ne, VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME);
++    if (g_vk.mem_ahb) {
++        ext[n_ext++] = VK_ANDROID_EXTERNAL_MEMORY_ANDROID_HARDWARE_BUFFER_EXTENSION_NAME;
++        ext[n_ext++] = VK_EXT_QUEUE_FAMILY_FOREIGN_EXTENSION_NAME;
++    }
+     // (which ways this driver could export memory at all: a report from a Mali or an Xclipse says what to try next -
+     // the option did nothing on a Mali-G720 r49p1 with no word in the log, #249)
+     LOG("[vk-cap] memory export: fd %s, dma-buf %s, Android hardware buffer %s, placed maps %s, host import %s\n",
+@@ -681,9 +693,10 @@ static void create_device(void) {
              (unsigned long long)g_vk.props.limits.minStorageBufferOffsetAlignment, types);
      }
      const char *missing = vk_missing_backend_feature(&h11, &h12, &h13);
@@ -100,7 +175,7 @@ index 39f84df..3ca95bd 100644
  #endif
      VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT div = {
          .sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT,
-@@ -773,6 +777,16 @@ static void create_device(void) {
+@@ -773,6 +786,16 @@ static void create_device(void) {
          ff.pNext = head;
          f.pNext = fault ? (void *)&ff : head;
      }
@@ -117,7 +192,7 @@ index 39f84df..3ca95bd 100644
  #endif
      b->independentBlend = h->independentBlend;
      b->dualSrcBlend = h->dualSrcBlend;
-@@ -1752,7 +1766,12 @@ bool vk_adreno_8xx(const char *name) {
+@@ -1752,7 +1775,12 @@ bool vk_adreno_8xx(const char *name) {
      return n >= 800 && n < 900;
  }
  // A Turnip path's setting (-1 Automatic, 1 on, 0 off) for this GPU
@@ -131,7 +206,7 @@ index 39f84df..3ca95bd 100644
  int vk_between_fps(void) {
      static int fps = 45;
      static uint64_t next;
-@@ -1831,7 +1850,9 @@ void ui_window_init(void) {
+@@ -1831,7 +1859,9 @@ void ui_window_init(void) {
              }
          }
          g_lrz_at_start = lrz != 0;
@@ -142,7 +217,7 @@ index 39f84df..3ca95bd 100644
          LOG("[vk] Turnip LRZ %s (%s%s)%s%s\n", lrz ? "on" : "off", g_settings.turnip_lrz < 0 ? "automatic: " : "settings",
              g_settings.turnip_lrz < 0 ? (model[0] ? model : "GPU unknown") : "", getenv("TU_DEBUG") ? ", TU_DEBUG=" : "",
              getenv("TU_DEBUG") ? getenv("TU_DEBUG") : "");
-@@ -1961,6 +1982,13 @@ bool vk_driver_is_turnip(void) {
+@@ -1961,6 +1991,13 @@ bool vk_driver_is_turnip(void) {
      }
      return t > 0;
  }
@@ -156,8 +231,172 @@ index 39f84df..3ca95bd 100644
  #endif
  
  void backend_init(void) {
+diff --git a/runtime/nvn/vulkan/exec.c b/runtime/nvn/vulkan/exec.c
+index 495503a..ae5ea51 100644
+--- a/runtime/nvn/vulkan/exec.c
++++ b/runtime/nvn/vulkan/exec.c
+@@ -1604,6 +1604,8 @@ void vk_exec_init(void) {
+ #ifdef __ANDROID__
+     extern void vk_memfd_probe(void);
+     vk_memfd_probe();  // (LARECOMP_MEMFD_PROBE=1: memfd_probe.c)
++    extern void vk_ahb_probe(void);
++    vk_ahb_probe();    // (an Arm GPU: the hardware buffers test, memfd_probe.c; LARECOMP_NO_AHB_PROBE=1 skips it)
+     gcopy_mode = !g_vk.host_import && !getenv("LARECOMP_VK_NO_GCOPY");
+     if (gcopy_mode) LOG("[vk] no heap import: shader global memory through CPU copies\n");
+     // (for good, without placed memory: the vertex cache and the texture checks fed by write tracking - vc_flush)
+diff --git a/runtime/nvn/vulkan/memfd_probe.c b/runtime/nvn/vulkan/memfd_probe.c
+index d45ac25..9f3692c 100644
+--- a/runtime/nvn/vulkan/memfd_probe.c
++++ b/runtime/nvn/vulkan/memfd_probe.c
+@@ -141,4 +141,146 @@ void vk_memfd_probe(void) {
+         if (g_vk.mem_dmabuf) probe_type(i, f, VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT);  // (the other file kind, #234)
+     }
+ }
++
++// ---- The same question through Android hardware buffers (an Arm GPU, once at the device's start; log tag [ahb]) ----
++// A Mali driver that refuses its own exported memory (the buffer refused, or no file from vkGetMemoryFdKHR / a map that
++// fails: Mali-G720 r44p1) may still take memory Android's allocator made: an AHardwareBuffer (BLOB), imported as a Vulkan
++// buffer (VK_ANDROID_external_memory_android_hardware_buffer), its dma-buf mapped by mmap - what the allocator's own lock
++// does. Nothing here is used by the game: each size is allocated, tested and freed, and the log says what worked.
++#include <dlfcn.h>
++#include <errno.h>
++#include <sys/ioctl.h>
++
++typedef struct { uint32_t width, height, layers, format; uint64_t usage; uint32_t stride, rfu0; uint64_t rfu1; } ahb_desc;
++typedef struct { int version, numFds, numInts; int data[1]; } ahb_handle;  // (libcutils' native_handle_t: its layout is fixed)
++struct ahb_dma_sync { uint64_t flags; };
++#define AHB_FORMAT_BLOB 0x21u
++#define AHB_USAGE_CPU_OFTEN 0x33ull       // CPU_READ_OFTEN | CPU_WRITE_OFTEN
++#define AHB_USAGE_GPU_DATA_BUFFER (1ull << 24)
++#define AHB_DMA_BUF_IOCTL_SYNC _IOW('b', 0, struct ahb_dma_sync)
++#define AHB_SYNC_RW 3ull
++#define AHB_SYNC_START 0ull
++#define AHB_SYNC_END 4ull
++
++static void probe_ahb_size(void *lib, uint64_t size, bool full) {
++    int (*alloc)(const ahb_desc *, void **) = (int (*)(const ahb_desc *, void **))dlsym(lib, "AHardwareBuffer_allocate");
++    void (*rel)(void *) = (void (*)(void *))dlsym(lib, "AHardwareBuffer_release");
++    const ahb_handle *(*gnh)(const void *) = (const ahb_handle *(*)(const void *))dlsym(lib, "AHardwareBuffer_getNativeHandle");
++    unsigned mb = (unsigned)(size >> 20);
++    if (!alloc || !rel || !gnh) { LOG("[ahb] %u MB: libandroid lacks %s\n", mb, !alloc ? "allocate" : !rel ? "release" : "getNativeHandle (Android 12+)"); return; }
++    if (!vkGetAndroidHardwareBufferPropertiesANDROID) { LOG("[ahb] %u MB: the driver's function for hardware buffers is not loaded\n", mb); return; }
++    ahb_desc d = {.width = (uint32_t)size, .height = 1, .layers = 1, .format = AHB_FORMAT_BLOB,
++                  .usage = AHB_USAGE_CPU_OFTEN | AHB_USAGE_GPU_DATA_BUFFER};
++    void *hb = NULL;
++    int ar = alloc(&d, &hb);
++    if (ar != 0 || !hb) { LOG("[ahb] %u MB: the allocator refused (%d)\n", mb, ar); return; }
++    VkBuffer buf = VK_NULL_HANDLE, out = VK_NULL_HANDLE;
++    VkDeviceMemory mem = VK_NULL_HANDLE;
++    uint8_t *p = MAP_FAILED;
++    void *resv = MAP_FAILED;
++    const char *why = NULL;
++    VkAndroidHardwareBufferPropertiesANDROID ap = {.sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID};
++    VkResult r = vkGetAndroidHardwareBufferPropertiesANDROID(g_vk.dev, (struct AHardwareBuffer *)hb, &ap);
++    if (r != VK_SUCCESS) { why = "the driver's properties of the buffer"; goto done; }
++    VkExternalMemoryBufferCreateInfo eb = {.sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO,
++                                           .handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID};
++    VkBufferCreateInfo bci = {.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO, .pNext = &eb, .size = size,
++                              .usage = VK_BUFFER_USAGE_STORAGE_BUFFER_BIT | VK_BUFFER_USAGE_TRANSFER_SRC_BIT |
++                                       VK_BUFFER_USAGE_TRANSFER_DST_BIT | VK_BUFFER_USAGE_VERTEX_BUFFER_BIT |
++                                       VK_BUFFER_USAGE_INDEX_BUFFER_BIT | VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT};
++    r = vkCreateBuffer(g_vk.dev, &bci, NULL, &buf);
++    if (r != VK_SUCCESS) { LOG("[ahb] %u MB: the Vulkan buffer refused (%d); the hardware buffer takes memory types 0x%x\n", mb, r, ap.memoryTypeBits); goto done; }
++    VkMemoryRequirements mr;
++    vkGetBufferMemoryRequirements(g_vk.dev, buf, &mr);
++    VkPhysicalDeviceMemoryProperties mp;
++    vkGetPhysicalDeviceMemoryProperties(g_vk.phys, &mp);
++    uint32_t bits = ap.memoryTypeBits & mr.memoryTypeBits;
++    int type = -1;  // host-visible first (what a CPU map needs), coherent and cached preferred
++    for (uint32_t i = 0; i < mp.memoryTypeCount; i++) {
++        VkMemoryPropertyFlags f = mp.memoryTypes[i].propertyFlags;
++        if (!(bits & (1u << i)) || !(f & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)) continue;
++        if (type < 0 || (f & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)) type = (int)i;
++    }
++    if (type < 0 && bits) type = __builtin_ctz(bits);
++    if (type < 0) { LOG("[ahb] %u MB: no memory type for it (hardware buffer 0x%x, buffer 0x%x)\n", mb, ap.memoryTypeBits, mr.memoryTypeBits); goto done; }
++    VkImportAndroidHardwareBufferInfoANDROID imp = {.sType = VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID,
++                                                    .buffer = (struct AHardwareBuffer *)hb};
++    VkMemoryAllocateInfo mai = {.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO, .pNext = &imp, .allocationSize = ap.allocationSize,
++                                .memoryTypeIndex = (uint32_t)type};
++    r = vkAllocateMemory(g_vk.dev, &mai, NULL, &mem);
++    if (r != VK_SUCCESS) { LOG("[ahb] %u MB: import refused (%d, type %d)\n", mb, r, type); goto done; }
++    r = vkBindBufferMemory(g_vk.dev, buf, mem, 0);
++    if (r != VK_SUCCESS) { LOG("[ahb] %u MB: bind refused (%d)\n", mb, r); goto done; }
++    const ahb_handle *h = gnh(hb);
++    if (!h || h->numFds < 1 || h->data[0] < 0) { LOG("[ahb] %u MB: imported (type %d, flags 0x%x), but no file in the buffer's handle (%d files)\n", mb, type, (unsigned)mp.memoryTypes[type].propertyFlags, h ? h->numFds : -1); goto done; }
++    int fd = h->data[0];  // (owned by the hardware buffer: not closed here)
++    p = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
++    if (p == MAP_FAILED) { LOG("[ahb] %u MB: imported (type %d, flags 0x%x), the file's mmap failed: errno %d\n", mb, type, (unsigned)mp.memoryTypes[type].propertyFlags, errno); p = MAP_FAILED; goto done; }
++    // at an address of our choosing, as the heap needs (over reserved pages, MAP_FIXED)
++    munmap(p, size);
++    p = MAP_FAILED;
++    resv = mmap(NULL, size, PROT_NONE, MAP_PRIVATE | MAP_ANONYMOUS | MAP_NORESERVE, -1, 0);
++    bool fixed = false;
++    if (resv != MAP_FAILED) {
++        p = mmap(resv, size, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_FIXED, fd, 0);
++        fixed = p == resv;
++        if (!fixed) p = MAP_FAILED;
++    }
++    if (!fixed) { LOG("[ahb] %u MB: imported (type %d), mmap works but not at a fixed address: errno %d\n", mb, type, errno); goto done; }
++    if (!full) { LOG("[ahb] %u MB: ok - allocated, imported (type %d, flags 0x%x), mapped at a fixed address\n", mb, type, (unsigned)mp.memoryTypes[type].propertyFlags); goto done; }
++    uint8_t *tmp = malloc(PROBE_SIZE);
++    if (!tmp) { why = "memory"; goto done; }
++    memset(tmp, 0x11, PROBE_SIZE);
++    double t0 = now_s();
++    for (int i = 0; i < 4; i++) memcpy(p, tmp, PROBE_SIZE);
++    double t1 = now_s();
++    volatile uint64_t sum = 0;
++    for (int i = 0; i < 4; i++) { memcpy(tmp, p, PROBE_SIZE); sum += tmp[i * 4096]; }
++    double t2 = now_s();
++    free(tmp);
++    double wr = 4.0 * PROBE_SIZE / (t1 - t0) / 1e9, rd = 4.0 * PROBE_SIZE / (t2 - t1) / 1e9;
++    // the GPU sees what the CPU wrote and the CPU what the GPU wrote (with the allocator's cache syncs around the GPU's work)
++    for (int i = 0; i < 4096; i++) p[i] = (uint8_t)(i * 7 + 3);
++    struct ahb_dma_sync sy = {AHB_SYNC_END | AHB_SYNC_RW};
++    int s1 = ioctl(fd, AHB_DMA_BUF_IOCTL_SYNC, &sy);
++    bool gpu_ok = false, gpu_sees = false, cpu_sees = false;
++    VkBufferCreateInfo vbi = bci;
++    vbi.size = 1u << 20;
++    if (vkCreateBuffer(g_vk.dev, &vbi, NULL, &out) == VK_SUCCESS && vkBindBufferMemory(g_vk.dev, out, mem, 8u << 20) == VK_SUCCESS)
++        gpu_ok = gpu_round(buf, out);
++    sy.flags = AHB_SYNC_START | AHB_SYNC_RW;
++    int s2 = ioctl(fd, AHB_DMA_BUF_IOCTL_SYNC, &sy);
++    if (gpu_ok) {
++        gpu_sees = true;
++        for (int i = 0; i < 4096 && gpu_sees; i++) gpu_sees = p[(8u << 20) + i] == (uint8_t)(i * 7 + 3);
++        cpu_sees = true;
++        for (int i = 0; i < 4096 && cpu_sees; i++) cpu_sees = p[(8u << 20) + 4096 + i] == 0x5a;
++    }
++    LOG("[ahb] %u MB: ok - allocated, imported (type %d, flags 0x%x%s%s), fixed-address map; CPU writes %.1f GB/s, reads %.1f GB/s; "
++        "the GPU %s the CPU's bytes, the CPU %s the GPU's (cache syncs rc %d/%d)\n", mb, type, (unsigned)mp.memoryTypes[type].propertyFlags,
++        mp.memoryTypes[type].propertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT ? " cached" : "",
++        mp.memoryTypes[type].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT ? " coherent" : "", wr, rd,
++        !gpu_ok ? "(submission failed)" : gpu_sees ? "sees" : "does NOT see", !gpu_ok ? "-" : cpu_sees ? "sees" : "does NOT see", s1, s2);
++done:
++    if (why) LOG("[ahb] %u MB: failed at %s\n", mb, why);
++    if (p != MAP_FAILED) munmap(p, size);
++    else if (resv != MAP_FAILED) munmap(resv, size);
++    if (out) vkDestroyBuffer(g_vk.dev, out, NULL);
++    if (buf) vkDestroyBuffer(g_vk.dev, buf, NULL);
++    if (mem) vkFreeMemory(g_vk.dev, mem, NULL);
++    rel(hb);
++}
++
++void vk_ahb_probe(void) {
++    if (!g_vk.mem_ahb || getenv("LARECOMP_NO_AHB_PROBE")) return;
++    void *lib = dlopen("libandroid.so", RTLD_NOW);
++    if (!lib) { LOG("[ahb] libandroid.so not loadable\n"); return; }
++    LOG("[ahb] Android hardware buffers as game memory (a test: nothing of it is used by the game)\n");
++    probe_ahb_size(lib, PROBE_SIZE, true);
++    long pages = sysconf(_SC_PHYS_PAGES), psz = sysconf(_SC_PAGESIZE);
++    uint64_t ram = pages > 0 && psz > 0 ? (uint64_t)pages * (uint64_t)psz : 0;
++    if (ram < (7ull << 30)) { LOG("[ahb] larger sizes skipped: %llu MB of RAM\n", (unsigned long long)(ram >> 20)); return; }
++    static const unsigned sizes_mb[] = {512, 1024, 2048, 3072};
++    for (unsigned i = 0; i < sizeof sizes_mb / sizeof *sizes_mb; i++) probe_ahb_size(lib, (uint64_t)sizes_mb[i] << 20, false);
++}
+ #endif
 diff --git a/runtime/nvn/vulkan/vk.h b/runtime/nvn/vulkan/vk.h
-index 0159d27..2a02b31 100644
+index 0159d27..e7ea7ef 100644
 --- a/runtime/nvn/vulkan/vk.h
 +++ b/runtime/nvn/vulkan/vk.h
 @@ -27,6 +27,11 @@ void vk_device_fault_report(void);
@@ -172,6 +411,14 @@ index 0159d27..2a02b31 100644
  void vk_wait_ready(void);    // device.c: until the device exists (the window's thread makes it)
  void vk_vamm_before_map(uint64_t addr, uint64_t size);
  bool vk_vamm_buffer(uint64_t addr, uint64_t size, VkBuffer *buf, VkDeviceSize *off);
+@@ -58,6 +63,7 @@ typedef struct {
+                                   // pipeline state (exec.c PipeKey.prim_restart)
+ #ifdef __ANDROID__
+     bool mem_dmabuf;              // external memory may be exported as DMA-BUF instead of OPAQUE_FD
++    bool mem_ahb;                 // Arm only: VK_ANDROID_external_memory_android_hardware_buffer is on (memfd_probe.c vk_ahb_probe)
+     bool mem_fd;                  // VK_KHR_external_memory_fd: the same through an exported file mapped there (vk_heap_place)
+     bool map_placed;              // VK_EXT_map_memory_placed: the guest heap mapped as GPU memory (exec.c vk_heap_place)
+     uint64_t placed_align;
 diff --git a/runtime/ui/i18n_es.inc b/runtime/ui/i18n_es.inc
 index 870cd1a..2dcc37d 100644
 --- a/runtime/ui/i18n_es.inc
